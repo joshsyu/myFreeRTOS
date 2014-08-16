@@ -33,6 +33,10 @@ uint8_t ballIsRun = 0;
 //Mode
 uint8_t demoMode = 0;
 
+//score
+uint8_t player1=0;
+uint8_t player2=0;
+
 void
 BallReset()
 {
@@ -152,8 +156,10 @@ GAME_Update()
 						ballVX = 0;
 					}
 				}
-				else
+				else{
+					player1++;
 					BallReset();
+				}
 			}
 
 			if( ballY <= player1Y + player1H ){
@@ -179,11 +185,15 @@ GAME_Update()
 							ballVX = 0;
 						}
 					}
-					else
+					else{
+						player2++;
 						BallReset();
-				}
+					}
+
 			}
+
 		}
+	}
 		else{	//if demoMode == 1
 
 			//Player1 move
@@ -264,8 +274,11 @@ GAME_Update()
 						ballVX = 0;
 					}
 				}
-				else
+				else{
+					player1++;
 					BallReset();
+
+				}
 			}
 
 			if( ballY <= player1Y + player1H ){
@@ -291,11 +304,16 @@ GAME_Update()
 						ballVX = 0;
 					}
 				}
-				else
+				else{
+					player2++;
 					BallReset();
+
+				}
+
+
+			}
 			}
 		}
-	}
 }
 
 	void
@@ -306,4 +324,11 @@ GAME_Render()
 	LCD_DrawFullRect( player2X, player2Y, player2W, player2H );
 	LCD_DrawFullRect( ballX, ballY, ballSize, ballSize );
 	LCD_DrawLine( 10, LCD_PIXEL_HEIGHT / 2, LCD_PIXEL_WIDTH - 20, LCD_DIR_HORIZONTAL );
+	LCD_SetTextColor( LCD_COLOR_BLACK );
+	uint8_t ascii = 0x30;
+	if(player1 > 9 || player2 > 9){
+		player1 = player2 = 0;
+	}
+	LCD_DisplayChar(LCD_PIXEL_HEIGHT/2+10,10, ascii+player2);
+	LCD_DisplayChar(LCD_PIXEL_HEIGHT/2-30,10, ascii+player1);
 }
