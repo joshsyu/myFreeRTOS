@@ -323,11 +323,20 @@ GAME_Render()
 	LCD_DrawFullRect( player1X, player1Y, player1W, player1H );
 	LCD_DrawFullRect( player2X, player2Y, player2W, player2H );
 	LCD_DrawFullRect( ballX, ballY, ballSize, ballSize );
+	//LCD_DrawFullCircle(ballX, ballY, ballSize);
 	LCD_DrawLine( 10, LCD_PIXEL_HEIGHT / 2, LCD_PIXEL_WIDTH - 20, LCD_DIR_HORIZONTAL );
 	LCD_SetTextColor( LCD_COLOR_BLACK );
 	uint8_t ascii = 0x30;
 	if(player1 > 9 || player2 > 9){
+		LCD_Clear(0x0000);
+		LCD_DisplayStringLine(LCD_PIXEL_HEIGHT/2, "Game over");
+		if(player1 > player2)
+			LCD_DisplayStringLine(LCD_PIXEL_HEIGHT/2+20, "Player1 Win");
+		else
+			LCD_DisplayStringLine(LCD_PIXEL_HEIGHT/2+20, "Player2 Win");
 		player1 = player2 = 0;
+		vTaskDelay(1000);
+		LCD_Clear(0x0000);
 	}
 	LCD_DisplayChar(LCD_PIXEL_HEIGHT/2+10,10, ascii+player2);
 	LCD_DisplayChar(LCD_PIXEL_HEIGHT/2-30,10, ascii+player1);
