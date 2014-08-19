@@ -28,8 +28,9 @@ void Draw_Update(){
 
 }
 void Draw_Render(uint16_t i, uint16_t j){
+
 	static unsigned char color[3];
-	unsigned char ch = '.';
+	
 	color[0] = RD(i, j)&255;
 	color[1] = GR(i, j)&255;
 	color[2] = BL(i, j)&255;
