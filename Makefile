@@ -30,7 +30,7 @@ LDFLAGS += -L $(call get_library_path,libgcc.a)
 
 # Basic configurations
 CFLAGS += -g -std=c99
-CFLAGS += -Wall
+#CFLAGS += -Wall
 
 # Optimizations
 CFLAGS += -g -std=c99 -O3 -ffast-math
@@ -90,6 +90,9 @@ OBJS += \
 #Game
 OBJS += $(PWD)/CORTEX_M4F_STM32F407ZG-SK/game/game.o
 CFLAGS += -I $(PWD)/CORTEX_M4F_STM32F407ZG-SK/game
+#Fractal
+OBJS += $(PWD)/CORTEX_M4F_STM32F407ZG-SK/fractal.o
+CFLAGS += -I $(PWD)/CORTEX_M4F_STM32F407ZG
 
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 CFLAGS += -I $(PWD)/CORTEX_M4F_STM32F407ZG-SK \
